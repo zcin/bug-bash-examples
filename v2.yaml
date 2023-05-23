@@ -1,0 +1,25 @@
+name: service-v2-test-no-name
+project: service-v2-bugbash
+version: v2
+cluster_env: multi-app-bug-bash:4
+cloud: anyscale_v2_default_cloud
+ray_serve_config:
+  applications:
+    - name: app1
+      import_path: hello_with_args:app_builder
+      args:
+        message: "Hello world!"
+      runtime_env:
+        working_dir: .
+      deployments:
+        - name: HelloWorld
+
+    - name: app2
+      route_prefix: /app2
+      import_path: hello_with_args:app_builder
+      args:
+        message: "Hello world, this is a different message!"
+      runtime_env:
+        working_dir: .
+      deployments:
+        - name: HelloWorld

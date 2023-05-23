@@ -1,0 +1,34 @@
+name: service-v2-test-no-name
+project: service-v2-bugbash
+version: v3
+cluster_env: multi-app-bug-bash:4
+cloud: anyscale_v2_default_cloud
+ray_serve_config:
+  applications:
+    - name: app1
+      import_path: hello_with_args:app_builder
+      args:
+        message: "Hello world!"
+      runtime_env:
+        working_dir: .
+      deployments:
+        - name: HelloWorld
+
+    - name: app2
+      route_prefix: /app2
+      import_path: fruit:deployment_graph
+      runtime_env:
+        working_dir: .
+      deployments:
+        - name: FruitMarket
+          num_replicas: 2
+        - name: MangoStand
+          user_config:
+            price: 3
+        - name: OrangeStand
+          user_config:
+            price: 2
+        - name: PearStand
+          user_config:
+            price: 4
+        - name: DAGDriver
