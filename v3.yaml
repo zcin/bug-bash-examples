@@ -8,9 +8,9 @@ ray_serve_config:
     - name: app1
       import_path: hello_with_args:app_builder
       args:
-        message: "Hello world!"
+        message: Hello world!
       runtime_env:
-        working_dir: .
+        working_dir: https://github.com/zcin/sample-serve-applications/archive/refs/heads/main.zip
       deployments:
         - name: HelloWorld
 
@@ -18,7 +18,7 @@ ray_serve_config:
       route_prefix: /app2
       import_path: fruit:deployment_graph
       runtime_env:
-        working_dir: .
+        working_dir: https://github.com/zcin/sample-serve-applications/archive/refs/heads/main.zip
       deployments:
         - name: FruitMarket
           num_replicas: 2

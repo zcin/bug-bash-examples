@@ -1,6 +1,6 @@
 name: service-v2-test-no-name
 project: service-v2-bugbash
-version: v1
+version: v5
 cluster_env: multi-app-bug-bash:4
 cloud: anyscale_v2_default_cloud
 ray_serve_config:
@@ -13,3 +13,9 @@ ray_serve_config:
         working_dir: https://github.com/zcin/sample-serve-applications/archive/refs/heads/main.zip
       deployments:
         - name: HelloWorld
+
+    - name: app2
+      route_prefix: /app2
+      import_path: conditional_dag:serve_dag
+      runtime_env:
+        working_dir: .
