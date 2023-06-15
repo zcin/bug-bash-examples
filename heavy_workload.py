@@ -5,7 +5,7 @@ from ray import serve
     autoscaling_config={
         "metrics_interval_s": 0.1,
         "min_replicas": 1,
-        "max_replicas": 3,
+        "max_replicas": 10,
         "look_back_period_s": 0.2,
         "downscale_delay_s": 0,
         "upscale_delay_s": 0,
