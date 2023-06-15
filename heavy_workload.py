@@ -1,11 +1,10 @@
-import asyncio
+import time
 from ray import serve
 
 @serve.deployment
 class Heavy:
-    async def __call__(self):
-        for _ in range(10):
-            await asyncio.sleep(0.1)
+    def __call__(self):
+        time.sleep(3)
         return "Hello"
 
 app = Heavy.bind()
