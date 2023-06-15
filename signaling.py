@@ -1,7 +1,14 @@
 import asyncio
+import starlette.requests
+from typing import Any, Dict
+
 from ray import serve
 from ray.serve.drivers import DAGDriver
-from ray.serve.http_adapters import json_request
+
+async def json_request(request: starlette.requests.Request) -> Dict[str, Any]:
+    if len(await request.body()) == 0:
+        return {}
+    return await request.json()
 
 @serve.deployment(ray_actor_options={"num_cpus": 0})
 class SignalDeployment:
