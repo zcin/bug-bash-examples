@@ -1,0 +1,25 @@
+name: test-service
+cluster_env: 830883877497_dkr_ecr_us-west-2_amazonaws_com_anyscale_ray_3ef875-py39-cpu__env__44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a:2
+compute_config: cindy-compact-cpu-config:1
+ray_serve_config:
+  applications:
+    - name: A
+      import_path: compact_scheduling.simple.app
+      route_prefix: /a
+      runtime_env:
+        working_dir: https://github.com/zcin/sample-serve-applications/archive/refs/heads/main.zip
+      deployments:
+        - name: Model
+          num_replicas: 2
+          ray_actor_options:
+            num_cpus: 1
+    - name: B
+      import_path: compact_scheduling.simple.app
+      route_prefix: /b
+      runtime_env:
+        working_dir: https://github.com/zcin/sample-serve-applications/archive/refs/heads/main.zip
+      deployments:
+        - name: Model
+          num_replicas: 1
+          ray_actor_options:
+            num_cpus: 2
